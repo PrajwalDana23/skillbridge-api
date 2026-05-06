@@ -5,8 +5,9 @@ from src.models.batch_student import BatchStudent
 from src.models.session import Session as SessionModel
 from src.models.attendance import Attendance
 from src.core.auth import require_role
+from src.dependencies import get_current_user
 
-router = APIRouter()
+router = APIRouter(prefix="/programme")
 
 def get_db():
     db = SessionLocal()
@@ -15,6 +16,9 @@ def get_db():
     finally:
         db.close()
 
+@router.get("/summary")
+def programme_summary(user=Depends(get_current_user)):
+    return {"message": "Programme summary"}
 
 @router.get("/batches/{batch_id}/summary")
 def batch_summary(batch_id: int,

@@ -11,4 +11,4 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     role = Column(String, nullable=False)
     institution_id = Column(Integer, nullable=True)
-    created_at = Column(DateTime, default=datetime)
+    created_at = Column(DateTime, default=datetime.utcnow)
